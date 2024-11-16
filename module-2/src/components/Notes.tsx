@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios
  from 'axios'
-const baseUrl = 'http://localhost:3001/api/notes'
+ const baseUrl = '/api/notes';
+
 
  interface NoteProps {
     note: any;
@@ -24,11 +25,11 @@ export const Notes: React.FC<Notes> = ({notes}) => {
     const [theNotes,setTheNotes] = useState<any[]>([]);
     const [newNote, setNewNote] = useState('');
     const [showAll, setShowAll] = useState(true)
-    // useEffect(() => {
-    //     axios.get('http://localhost:3001/notes').then(response => {
-    //         setTheNotes(response.data)
-    //     })
-    // }, [])
+    useEffect(() => {
+        axios.get(baseUrl).then(response => {
+            setTheNotes(response.data)
+        })
+    }, [])
  
 
 

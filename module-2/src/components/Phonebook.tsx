@@ -1,16 +1,23 @@
 
-import { useState } from 'react'
-
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 const Phonebook = () => {
   const [persons, setPersons] = useState<any[]>([
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+
+  useEffect(() => {
+    axios.get('api/persons').then(response => {
+      setPersons(response.data)
+    })
+  })
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setNewName(event.target.value)
   }
+
     const onSubmitPerson = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         if (persons.some(person => areObjectsEqual(person, { name: newName }))) {

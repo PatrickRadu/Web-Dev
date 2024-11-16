@@ -3,6 +3,8 @@ const app = express();
 app.use(express.json());
 const cors = require('cors');
 app.use(cors());
+app.use(express.static('dist'));
+
 let notes = [
     {
       id: "1",
@@ -58,7 +60,7 @@ let notes = [
   app.get('/api/notes',(req,res)=>{
         res.json(notes);
     })
-const Port=3001;
+const Port = process.env.PORT || 3000;
 app.listen(Port,()=>{
     console.log(`Server is running on port ${Port}`);
 })

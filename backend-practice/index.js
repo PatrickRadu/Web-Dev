@@ -3,6 +3,9 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 var morgan = require('morgan')
+const cors = require('cors');
+app.use(cors());
+app.use(express.static('dist'));
 let phonebook = 
     [
         { 
@@ -114,7 +117,7 @@ const unknownEndpoint = (request, response) => {
   app.use(unknownEndpoint)
 
 
-const port = 3001;
+const port = process.env.PORT|| 3001;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
